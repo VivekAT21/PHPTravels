@@ -33,19 +33,21 @@ public class Tst_SignUpTest extends Cls_Base {
 	}
 	
 	@Test
-	public void blankSubmittion() {
+	public void blankSubmittion() throws FileNotFoundException {
 		obj_signup.mtd_click_submit();
 		assertEquals(obj_signup.mtd_validation(), true);
 	}
 	
 	@Test
-	public void validSignUp() {
+	public void validSignUp() throws FileNotFoundException {
 		System.out.println("test Case");
-		obj_signup.mtd_click_submit();
+		
+		obj_signup.mtd_clickCookie();
+		obj_signup.mtd_signUp("Vivek", "Garg", "9898989898", "vivek.garg@mailinator.com", "Blue2001", "Blue2001");
 	}
 	
-	@AfterTest
+	/*@AfterTest
 	public void end() {
 		driver.quit();
-	}
+	}*/
 }

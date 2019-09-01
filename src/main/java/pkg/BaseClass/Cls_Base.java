@@ -98,8 +98,8 @@ public class Cls_Base {
 	* @version 1.0
 	* @since   2019-05-26 
 	*/
-	public void mtd_geTitle() {
-		System.out.println(driver.getTitle());
+	public String mtd_getTitle() {
+		return driver.getTitle();
 	}
 	
 	public boolean mtd_verifyImage(WebElement element) {
@@ -211,6 +211,9 @@ public class Cls_Base {
 		elementwait.until(visibilityOfDynamicElementLocated(element));
 	}
 	
+	public void mtd_impl_wait(int waitSec) {
+		driver.manage().timeouts().implicitlyWait(waitSec, TimeUnit.SECONDS);
+	}
 	/**
 	* <h2> currntDate </h2>
 	* @return  current date and time
@@ -237,5 +240,17 @@ public class Cls_Base {
 			break;
 			}
 		}
+	}
+	
+	public static void overRiding(int x) {
+		System.out.println("I am learning overriding  parent 1: " + x);
+	}
+	public static void overRiding(String x) {
+		System.out.println("I am leardning overloading parent 2: " + x);
+	}
+	
+	public static void overRiding(String x, int y) {
+		System.out.println("I am leardning overloading parent 3: " + x);
+		System.out.println("I am leardning overloading parent 4: " + y);
 	}
 }

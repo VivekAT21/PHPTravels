@@ -10,9 +10,14 @@ import pkg.Util.Cls_writeData;
 public class Exe extends Cls_Base {
 	
 	public Exe() throws FileNotFoundException {
-		super();
+		super.overRiding(3);
 		}
 
+	public static void overRiding(int y) {
+		System.out.println("I am learning overriding child 5: " + 10*y);
+		
+	}
+	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		Exe e1 = new Exe(); 
@@ -22,15 +27,19 @@ public class Exe extends Cls_Base {
 		selectDate("28");
 		System.out.println("Vivek");*/
 		
-		String filepath = prop.getProperty("FILEPATH");
+	/*	String filepath = prop.getProperty("FILEPATH");
 		Cls_readData cdp = new Cls_readData();
 			
 		//cdp.getData(filepath, 0);
 		
 		Cls_writeData cwd = new Cls_writeData();
 		//cwd.copysheet(prop.getProperty("FILEPATH"), prop.getProperty("OUTFILEPATH"));
-		Cls_writeData.addnewcolumn(prop.getProperty("OUTFILEPATH"), "Test");
+		Cls_writeData.addnewcolumn(prop.getProperty("OUTFILEPATH"), "Test");*/
 		driver.quit();
+		
+		overRiding("vivek");
+		overRiding("Raj", 5);
+		overRiding(2);
 	}
 
 }
