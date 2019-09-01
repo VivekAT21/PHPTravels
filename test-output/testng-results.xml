@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2019-08-26T10:35:50Z" name="Default suite" finished-at="2019-08-26T10:35:52Z" duration-ms="2262">
+    <groups>
+    </groups>
+    <test started-at="2019-08-26T10:35:50Z" name="Default test" finished-at="2019-08-26T10:35:52Z" duration-ms="2262">
+      <class name="pkg_PageTest.Tst_SignUpTest">
+        <test-method is-config="true" signature="initilize()[pri:0, instance:pkg_PageTest.Tst_SignUpTest@60b85ba1]" started-at="2019-08-26T10:35:50Z" name="initilize" finished-at="2019-08-26T10:35:51Z" duration-ms="1064" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initilize -->
+        <test-method signature="blankSubmittion()[pri:0, instance:pkg_PageTest.Tst_SignUpTest@60b85ba1]" started-at="2019-08-26T10:35:51Z" name="blankSubmittion" finished-at="2019-08-26T10:35:52Z" duration-ms="368" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- blankSubmittion -->
+        <test-method signature="validSignUp()[pri:0, instance:pkg_PageTest.Tst_SignUpTest@60b85ba1]" started-at="2019-08-26T10:35:52Z" name="validSignUp" finished-at="2019-08-26T10:35:52Z" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validSignUp -->
+        <test-method signature="verifyTitle()[pri:1, instance:pkg_PageTest.Tst_SignUpTest@60b85ba1]" started-at="2019-08-26T10:35:52Z" name="verifyTitle" finished-at="2019-08-26T10:35:52Z" duration-ms="55" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyTitle -->
+        <test-method is-config="true" signature="end()[pri:0, instance:pkg_PageTest.Tst_SignUpTest@60b85ba1]" started-at="2019-08-26T10:35:52Z" name="end" finished-at="2019-08-26T10:35:52Z" duration-ms="740" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- end -->
+      </class> <!-- pkg_PageTest.Tst_SignUpTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

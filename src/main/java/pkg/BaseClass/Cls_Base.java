@@ -39,7 +39,7 @@ public class Cls_Base {
 	//Create constructor
 	public Cls_Base() throws FileNotFoundException {
 		
-		configRead();
+		mtd_configRead();
 		String browserName = prop.getProperty("BROWSER");
 		if (driver== null) {		
 			if (browserName.equalsIgnoreCase("Chrome")){
@@ -70,6 +70,7 @@ public class Cls_Base {
 					e.printStackTrace();
 				}
 			}
+		driver.manage().deleteAllCookies();
 		driver.get(prop.getProperty("URL"));
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
@@ -77,7 +78,7 @@ public class Cls_Base {
 		}
 	}
 	
-	public void configRead() throws FileNotFoundException {
+	public void mtd_configRead() throws FileNotFoundException {
 		//Load properties
 		prop = new Properties();
 		FileInputStream fis;
@@ -97,11 +98,11 @@ public class Cls_Base {
 	* @version 1.0
 	* @since   2019-05-26 
 	*/
-	public void geTitle() {
-			System.out.println(driver.getTitle());
+	public void mtd_geTitle() {
+		System.out.println(driver.getTitle());
 	}
 	
-	public boolean verifyImage(WebElement element) {
+	public boolean mtd_verifyImage(WebElement element) {
 		boolean isVisible =	element.isDisplayed();
 		return isVisible;
 		}
@@ -112,8 +113,8 @@ public class Cls_Base {
 	* @version 1.0
 	* @since   2019-05-26 
 	*/
-	public void clickLink(WebElement element) {
-			element.click();
+	public void mtd_clickLink(WebElement element) {
+		element.click();
 	}
 	/**
 	* <h2> getText </h2>
@@ -122,8 +123,9 @@ public class Cls_Base {
 	* @version 1.0
 	* @since   2019-05-26 
 	*/
-	public void getText(WebElement element) {
-			element.getText();
+	public String mtd_getText(WebElement element) {
+		String getTitle = element.getText();
+		return getTitle;
 	}
 	/**
 	* <h2> enterValue </h2>
@@ -134,10 +136,17 @@ public class Cls_Base {
 	* @version 1.0
 	* @since   2019-05-26 
 	*/
-	public void enterValue(WebElement element, String value) {
-			element.clear();
-			element.sendKeys(value);
+	public void mtd_enterValue(WebElement element, String value) {
+		element.clear();
+		element.sendKeys(value);
 	}
+
+	//if webelement present
+	public boolean mtd_wbElement(WebElement element) {
+		boolean isPresent = element.isDisplayed();
+		return isPresent;
+	}
+	
 	/**
 	* <h2> switchtoChild </h2>
 	* This function is used to switch between the windows
@@ -146,15 +155,16 @@ public class Cls_Base {
 	* @version 1.0
 	* @since   2019-05-26 
 	*/
-	public void switchtoChild() throws InterruptedException {
-			Set<String> driverId=driver.getWindowHandles();
-			Iterator<String> it =driverId.iterator();
-			String parentId=it.next();
-			System.out.println("Parent is " + parentId);
-			String childId=it.next();
-			System.out.println("Child is " + childId);
-			driver.switchTo().window(childId);
+	public void mtd_switchtoChild() throws InterruptedException {
+		Set<String> driverId=driver.getWindowHandles();
+		Iterator<String> it =driverId.iterator();
+		String parentId=it.next();
+		System.out.println("Parent is " + parentId);
+		String childId=it.next();
+		System.out.println("Child is " + childId);
+		driver.switchTo().window(childId);
 	}
+	
 	/**
 	* <h2> ExpectedCondition </h2>
 	* This function is used for explict wait for WebElement
@@ -164,68 +174,68 @@ public class Cls_Base {
 	* @since   2019-05-26 
 	*/
 	//**************************this is customise method for explict wait 	
-			public static ExpectedCondition<WebElement> visibilityOfDynamicElementLocated(final WebElement element) {
-			    return new ExpectedCondition<WebElement>() {
-			      public WebElement apply(WebDriver driver) {
-			        try {
-			          return elementIfVisible(element);
-			        } catch (StaleElementReferenceException e) {
-			          return null;
-			        }
-			      }
-
-			      @Override
-			      public String toString() {
-			        return "visibility of element located by " ;
-			      }
-			    };
-			  }
-			
-		private static WebElement elementIfVisible(WebElement element) {
-		    return element.isDisplayed() ? element : null;
-		}
-		
-		/**
-		* <h2> explictWait </h2>
-		* Explict wait on the basis of pagefactory web element
-		* @param   webElement
-		* @param   wait time
-		* @author  Vivek Garg
-		* @version 1.0
-		* @since   2019-05-26 
-		*/
-		//Function: This is customise menthod for explict wait based on webelements
-		//Arguments: Webelement and wait time
-		public void explictWait(WebElement element, int timeSpan) {
-			WebDriverWait elementwait = new WebDriverWait(driver, timeSpan);
-			elementwait.until(visibilityOfDynamicElementLocated(element));
-		}
-		/**
-		* <h2> currntDate </h2>
-		* @return  current date and time
-		* @author  Vivek Garg
-		* @version 1.0
-		* @since   2019-05-26 
-		*/
-		//Function: To get current date and time
-		public String currntDate() {
-			DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-			Date date = new Date();
-			String curntdate = df.format(date);
-			return curntdate;
-		}
-		
-		public static void selectDate(String day) {
-			List<WebElement> dates = driver.findElements(By.xpath("//div[@class='datepicker dropdown-menu'][4]//div[@class='datepicker-days']//tr[5]//td"));
-			
-			int count = dates.size();
-			System.out.println(count);
-			for (int i=0; i<count; i++) {
-				String xx= driver.findElements(By.xpath("//div[@class='datepicker dropdown-menu'][4]//div[@class='datepicker-days']//tr[5]//td")).get(i).getText();
-				if (xx.equalsIgnoreCase(day)) {
-					driver.findElement(By.xpath("//div[@class='datepicker dropdown-menu'][4]//div[@class='datepicker-days']//tr[5]//td")).click();
-					break;
+	public static ExpectedCondition<WebElement> visibilityOfDynamicElementLocated(final WebElement element) {
+	    return new ExpectedCondition<WebElement>() {
+	    public WebElement apply(WebDriver driver) {
+	    try {
+	    	return elementIfVisible(element);
+	    	} catch (StaleElementReferenceException e) {
+	    		return null;
 				}
+		}
+
+		@Override
+		public String toString() {
+			return "visibility of element located by " ;
+			}
+		};
+	}
+				
+	private static WebElement elementIfVisible(WebElement element) {
+	    return element.isDisplayed() ? element : null;
+	}
+		
+	/**
+	* <h2> explictWait </h2>
+	* Explict wait on the basis of pagefactory web element
+	* @param   webElement
+	* @param   wait time
+	* @author  Vivek Garg
+	* @version 1.0
+	* @since   2019-05-26 
+	*/
+	//Function: This is customise menthod for explict wait based on webelements
+	//Arguments: Webelement and wait time
+	public void mtd_explictWait(WebElement element, int timeSpan) {
+		WebDriverWait elementwait = new WebDriverWait(driver, timeSpan);
+		elementwait.until(visibilityOfDynamicElementLocated(element));
+	}
+	
+	/**
+	* <h2> currntDate </h2>
+	* @return  current date and time
+	* @author  Vivek Garg
+	* @version 1.0
+	* @since   2019-05-26 
+	*/
+	//Function: To get current date and time
+	public String mtd_currntDate() {
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		Date date = new Date();
+		String curntdate = df.format(date);
+		return curntdate;
+	}
+			
+	public static void mtd_selectDate(String day) {
+		List<WebElement> dates = driver.findElements(By.xpath("//div[@class='datepicker dropdown-menu'][4]//div[@class='datepicker-days']//tr[5]//td"));
+		int count = dates.size();
+		System.out.println(count);
+		for (int i=0; i<count; i++) {
+			String xx= driver.findElements(By.xpath("//div[@class='datepicker dropdown-menu'][4]//div[@class='datepicker-days']//tr[5]//td")).get(i).getText();
+			if (xx.equalsIgnoreCase(day)) {
+			driver.findElement(By.xpath("//div[@class='datepicker dropdown-menu'][4]//div[@class='datepicker-days']//tr[5]//td")).click();
+			break;
 			}
 		}
+	}
 }
